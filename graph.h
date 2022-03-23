@@ -6,7 +6,7 @@
 #define GRAPH_GRAPH_H
 
 #include "map"
-#include "Node.cpp"
+#include "Node.h"
 #include <iostream>
 template<typename Key,
     typename Value,
@@ -15,23 +15,32 @@ template<typename Key,
 class Graph {
 public:
     using key_type = Key;
-    using mapped_type = Value;
+    using value_type = Value;
     using weight_type = Weight;
-    using iterator = typename  std::map< key_type, Node<key_type,mapped_type,weight_type> >::iterator;
-    using const_iterator = typename std::map< key_type, Node<key_type,mapped_type,weight_type>>::const_iterator;
+    using iterator = typename  std::map< key_type, Node<key_type,value_type,weight_type> >::iterator;
+    using const_iterator = typename std::map< key_type, Node<key_type,value_type,weight_type>>::const_iterator;
 //    -----------------------|constructors|--------------------------------------
     Graph() = default;
 
     Graph(const Graph& obj): m_nodes(obj.m_nodes){};
 //    ------------------------|iterators|--------------------------------------
 
-    iterator begin(){return m_nodes.begin();}
-    const_iterator begin() const{return m_nodes.cbegin();}
-    iterator end(){return m_nodes.end();}
-    const_iterator end() const{return m_nodes.cend();}
+    iterator begin();
+    const_iterator begin() const;
+    iterator end();
+    const_iterator end() const;
 
     const_iterator cbegin() const {return m_nodes.cbegin();}
     const_iterator cend() const {return m_nodes.cend();}
+
+//    ------------------------|addressing|------------------------------------
+    value_type& operator[] (const key_type& key);
+
+    value_type& at(const key_type& key);
+
+//    ------------------------|insert|--------------------------------------
+    std::pair<iterator, bool> insert_node(const key_type& input_key,const value_type& val);
+
 
 //    ------------------------|methods|--------------------------------------
 
@@ -41,28 +50,20 @@ public:
 
     void clear() {m_nodes.clear();}
 
-    void swap(Graph& obj){};
+    void swap(Graph& obj){m_nodes.swap(obj.m_nodes);};
 
-//    -----------------------|additional|--------------------------------------
-    void print() {
-        if (this->empty()) {
-            std::cout << "> This graph is empty!" << std::endl;
-            return;
-        }
-        std::cout << "> Size of graph: " << this->size() << std::endl;
-        for (const auto& [key, node] : *this) {
-            std::cout << '[' << key << "] stores: " << node.value()
-                      << " and matches with:" << std::endl;
-            for (const auto& [key, weight] : node)
-                std::cout << "\t[" << key << "]\t with weight: "
-                          << weight << std::endl;
-        }
-    }
+    size_t degree_in(const key_type & key);
+
+    size_t degree_out (const key_type & key);
+
+    bool loop(const key_type & key);
 
 private:
-    std::map< key_type, Node<key_type,mapped_type,weight_type> > m_nodes;
-
+    std::map< key_type, Node<key_type,value_type,weight_type> > m_nodes;
 };
+#include "graph.hpp"
 
+template<typename Key, typename Value, typename Weight>
+void swap(Graph<Key, Value, Weight> & left, Graph<Key, Value, Weight> & right){left.swap(right);return;}
 
 #endif //GRAPH_GRAPH_H
