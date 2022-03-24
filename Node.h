@@ -78,6 +78,9 @@ public:
 //    ---------------------------|erase|--------------------------------------
     void clear_edges_for_node() noexcept;
 
+    void clear_edges_to_for_node(const key_type& search_key) noexcept;
+
+    bool erase_edge(key_type& search_key);
 
 private:
     //     --------------------------|data|--------------------------------------

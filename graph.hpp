@@ -105,9 +105,44 @@ Graph<Key, Value, Weight>::insert_or_assign_edge(std::pair<key_type, key_type> k
 }
 
 template<typename Key, typename Value, typename Weight>
-void Graph<Key, Value, Weight>::clear_edges() {
+void Graph<Key, Value, Weight>::clear_edges() noexcept {
     for (auto&[key, node]: *this){
         node.clear_edges_for_node();
     }
 }
+
+template<typename Key, typename Value, typename Weight>
+bool  Graph<Key, Value, Weight>::erase_edges_go_from(const key_type& search_key){
+    try{ m_nodes.at(search_key);}
+    catch (...){ return 0;}
+
+    m_nodes[search_key].clear_edges_for_node();
+    return 1;
+
+}
+
+template<typename Key, typename Value, typename Weight>
+bool Graph<Key, Value, Weight>::erase_edges_go_to(const key_type &search_key) {
+    try{ m_nodes.at(search_key);}
+    catch (...){ return 0;}
+
+    for (auto&[key, node]: *this){
+        node.clear_edges_to_for_node(search_key);
+    }
+    return 1;
+}
+
+template<typename Key, typename Value, typename Weight>
+bool Graph<Key, Value, Weight>::erase_node(const key_type &search_key) {
+    try{ m_nodes.at(search_key);}
+    catch (...){ return 0;}
+
+    m_nodes.erase(search_key);
+
+    for (auto&[key, node]: *this){
+        node.clear_edges_to_for_node(search_key);
+    }
+    return 1;
+}
+
 

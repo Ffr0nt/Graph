@@ -62,8 +62,13 @@ public:
     std::pair<node_it, bool> insert_or_assign_edge(std::pair<key_type,key_type> key_pair, weight_type weight);
 
 //    ---------------------------|erase|--------------------------------------
-    void clear_edges();
+    void clear_edges() noexcept;
 
+    bool erase_edges_go_from(const key_type& search_key);
+
+    bool erase_edges_go_to(const key_type& search_key);
+
+    bool erase_node(const key_type& search_key);
 
 //    ------------------------|methods|--------------------------------------
 
@@ -83,6 +88,7 @@ public:
 
 private:
     std::map< key_type, Node<key_type,value_type,weight_type> > m_nodes;
+
 };
 #include "graph.hpp"
 
