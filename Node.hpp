@@ -29,12 +29,12 @@ typename Node<Key, Value, Weight>::const_iterator Node<Key, Value, Weight>::end(
 
 template<typename Key, typename Value, typename Weight>
 const typename Node<Key, Value, Weight>::weight_type& Node<Key, Value, Weight>::operator[](const key_type &key) const {
-    return *m_con_nodes[key];
+    return &m_con_nodes[key];
 }
 
 template<typename Key, typename Value, typename Weight>
 typename Node<Key, Value, Weight>::weight_type& Node<Key, Value, Weight>::operator[](const key_type &key) {
-    return *m_con_nodes[key];
+    return &m_con_nodes[key];
 }
 
 template<typename Key, typename Value, typename Weight>
