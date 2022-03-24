@@ -19,10 +19,24 @@ public:
     using weight_type = Weight;
     using iterator = typename  std::map< key_type, Node<key_type,value_type,weight_type> >::iterator;
     using const_iterator = typename std::map< key_type, Node<key_type,value_type,weight_type>>::const_iterator;
+    using node_it =  typename Node<Key, Value, Weight>::iterator ;
 //    -----------------------|constructors|--------------------------------------
     Graph() = default;
-
     Graph(const Graph& obj): m_nodes(obj.m_nodes){};
+    Graph (Graph&& obj)noexcept : m_nodes(std::move(obj.m_nodes)){};
+    Graph(const std::initializer_list<std::pair<key_type,value_type>> & init_list):
+    m_nodes(init_list.begin(), init_list.end()){};
+
+//    ---------------------------| = |--------------------------------------
+    Graph& operator = (const Graph& gr) {
+        m_nodes = gr.m_nodes;
+        return *this;
+    }
+    Graph& operator = (Graph&& gr) noexcept {
+        m_nodes = std::move(gr.m_nodes);
+        return *this;
+    }
+
 //    ------------------------|iterators|--------------------------------------
 
     iterator begin();
@@ -34,12 +48,21 @@ public:
     const_iterator cend() const {return m_nodes.cend();}
 
 //    ------------------------|addressing|------------------------------------
-    value_type& operator[] (const key_type& key);
+    value_type & operator[] (const key_type& key);
 
-    value_type& at(const key_type& key);
+    Node<key_type,value_type,weight_type>& at(const key_type& key);
 
-//    ------------------------|insert|--------------------------------------
+//    --------------------------|insert|--------------------------------------
     std::pair<iterator, bool> insert_node(const key_type& input_key,const value_type& val);
+
+    std::pair<iterator, bool> insert_or_assign_node(const key_type& input_key,const value_type& val);
+
+    std::pair<node_it, bool> insert_edge(std::pair<key_type,key_type> key_pair, weight_type weight);
+
+    std::pair<node_it, bool> insert_or_assign_edge(std::pair<key_type,key_type> key_pair, weight_type weight);
+
+//    ---------------------------|erase|--------------------------------------
+    void clear_edges();
 
 
 //    ------------------------|methods|--------------------------------------

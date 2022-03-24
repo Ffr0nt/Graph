@@ -31,20 +31,21 @@ int main() {
 
     gr["A"];
     auto a = gr.at("A");
-    std::cout<< std::endl <<  a << std::endl;
+    std::cout<< std::endl <<  a.value() << std::endl << std::endl ;
     print(gr);
+//    gr.insert_or_assign_node("B",{1,1,1});
 
 //    gr.degree_in("A");
 //    gr.degree_out("A");
 
 
-/*    Graph<std::string, Point, double> graph;
+   Graph<std::string, Point, double> graph;
     graph["zero"]; // Заполнится точкой, которая заполнится нулями
     auto [it1, flag1] = graph.insert_node("first", {1, 1, 1});
     std::cout << std::boolalpha << flag1 << std::endl; // => true
     graph["second"]; // Заполнится точкой, которая заполнится нулями
     auto [it2, flag2] = graph.insert_or_assign_node("second", {2, 2, 2}); // перезаполнит
-    std::cout << std::boolalpha << flag2 << std::endl; // => false
+    std::cout << std::boolalpha << flag2 << " flag2 " << std::endl; // => false
     graph["third"] = Point{ 3, 3, 3 };
     auto [it3, flag3] = graph.insert_node("third", {1, 1, 1}); // бездействует
     std::cout << std::boolalpha << flag3 << std::endl; // => false
@@ -73,9 +74,10 @@ int main() {
         std::cout << "How many edges are going from here?" << node.size() << std::endl;
         node.value() = Point{ 1,2,3 }; // могу поменять вес
         for (auto& [key, weight] : node) {
-// key = "new key"; // ОШИБКА: нельзя менять ключ
+//             key = "new key"; // ОШИБКА: нельзя менять ключ
             weight = 11.11; // могу задать новый вес у этого ребра
         }
+
         bool flag = node.erase_edge("first"); // => true, если удалил
 // => false, если такого ребра нет
     }
@@ -116,7 +118,5 @@ int main() {
     graph.clear(); // Очистить все вершины (очевидно, вместе с рёбрами)
     print(graph);
 
-
-*/
     return 0;
 }
