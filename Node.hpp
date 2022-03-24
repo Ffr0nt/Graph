@@ -56,14 +56,14 @@ void Node<Key, Value, Weight>::clear_edges_for_node() noexcept {
 
 template<typename Key, typename Value, typename Weight>
 void Node<Key, Value, Weight>::clear_edges_to_for_node(const key_type& search_key) noexcept {
-    try{ m_con_nodes.at(m_con_nodes);}
+    try{ m_con_nodes.at(search_key);}
     catch (...){ return ;}
     m_con_nodes.erase(search_key);
 }
 
 template<typename Key, typename Value, typename Weight>
-bool Node<Key, Value, Weight>::erase_edge(key_type &search_key) {
-    try{ m_con_nodes.at(m_con_nodes);}
+bool Node<Key, Value, Weight>::erase_edge(const key_type &search_key) {
+    try{ m_con_nodes.at(search_key);}
     catch (...){ return 0;}
     m_con_nodes.erase(search_key);
     return 1;

@@ -80,7 +80,7 @@ public:
 
     void clear_edges_to_for_node(const key_type& search_key) noexcept;
 
-    bool erase_edge(key_type& search_key);
+    bool erase_edge(const key_type& search_key);
 
 private:
     //     --------------------------|data|--------------------------------------
