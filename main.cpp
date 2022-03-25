@@ -105,7 +105,7 @@ void test_3(){
         std::cout << std::endl;
     }
 
-} //iterators
+} // iterators
 void test_4(){
     Graph<std::string, Point, double> gr;
     gr["one"] = Point{1.1, 1.1,1.1};
@@ -139,7 +139,60 @@ void test_4(){
     }
 } // methods describing edges
 void test_5(){
-}
+    Graph<std::string, Point, double> gr;
+    gr["one"] = Point{1.1, 1.1,1.1};
+    gr["two"] = Point{2.2,2.2,2.2};
+    gr["three"] = Point{3.3,3.3,3.3};
+    gr.insert_edge({"three","two"}, 3.2);
+    gr.insert_edge({"two","three"}, 2.3);
+    gr.insert_edge({"three","one"}, 3.1);
+    print(gr);
+    std::cout << std::endl;
+
+    std::cout << "gr.insert_node(\"four\",Point{1.1, 1.1,1.1} ).second"<< std::endl;
+    std::cout << gr.insert_node("four",Point{1.1, 1.1,1.1} ).second << std::endl;
+    std::cout << gr.insert_node("four",Point{1.1, 1.1,1.1} ).second << std::endl;
+
+    std::cout << "gr.insert_edge({\"one\", \"two\"}, 22.22).second"<< std::endl;
+    std::cout << gr.insert_edge({"one", "two"}, 22.22).second<< std::endl;
+    std::cout << gr.insert_edge({"one", "two"}, 22.22).second<< std::endl;
+    print(gr);
+
+    std::cout << "gr.erase_edges_go_from((\"two\")"<< std::endl;
+    std::cout << gr.erase_edges_go_from("two")<< std::endl;
+    std::cout << "gr.erase_edges_go_from((\"six\")"<< std::endl;
+    std::cout << gr.erase_edges_go_from("six")<< std::endl;
+    print(gr);
+    std::cout << "gr.erase_edges_go_to((\"two\")"<< std::endl;
+    std::cout << gr.erase_edges_go_to("two")<< std::endl;
+    std::cout << "gr.erase_edges_go_to((\"six\")"<< std::endl;
+    std::cout << gr.erase_edges_go_to("six")<< std::endl;
+    print(gr);
+    std::cout << " gr.clear();"<< std::endl;
+    gr.clear();
+    print(gr);
+
+} // node / edge insert / clear
+void test_6(){
+    Graph<std::string, Point, double> gr;
+
+    try{
+        gr.degree_in("random");
+    }
+    catch( std::runtime_error er ){std::cout<<er.what()<<std::endl;}
+    try{
+        gr.degree_out("random");
+    }
+    catch( std::runtime_error er ){std::cout<<er.what()<<std::endl;}
+    try{
+        gr.loop("random");
+    }
+    catch( std::runtime_error er ){std::cout<<er.what()<<std::endl;}
+    try{
+        gr.at("random");
+    }
+    catch( std::runtime_error er ){std::cout<<er.what()<<std::endl;}
+} // degree_in degree_out loop at special errors
 void test_0(){
     Graph<std::string, Point, double> gr;
     print(gr);
@@ -234,7 +287,7 @@ void test_0(){
 } // baseline test
 
 int main() {
-    int NUM = 4;
+    int NUM = 6;
 
     switch (NUM) {
         case 1:
@@ -251,6 +304,9 @@ int main() {
             break;
         case 5:
             test_5();
+            break;
+        case 6:
+            test_6();
             break;
         default:
             std::cout<<"Original tests"<< std::endl << std::endl;

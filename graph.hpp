@@ -32,7 +32,7 @@ size_t Graph<Key, Value, Weight>::degree_in(const key_type &searching_key) {
 
     if (m_nodes.count(searching_key) == 0) {
         throw std::runtime_error(
-                "\nNo key named: " + std::string(searching_key) + " in graph. While degree_in command.");
+                "\nNo key named: \"" + std::string(searching_key) + "\" in graph. While degree_in command.");
     }
     size_t answer = 0;
     for (auto&[key, node]: *this) {
@@ -49,16 +49,17 @@ template<typename Key, typename Value, typename Weight>
 size_t Graph<Key, Value, Weight>::degree_out(const key_type &searching_key) {
     if (m_nodes.count(searching_key) == 0) {
         throw std::runtime_error(
-                "\nNo key named: " + std::string(searching_key) + " in graph. While degree_out command.");
+                "\nNo key named: \"" + std::string(searching_key) + "\" in graph. While degree_out command.");
     }
     return m_nodes[searching_key].size();
 
 }
 
 template<typename Key, typename Value, typename Weight>
-bool Graph<Key, Value, Weight>::loop(const key_type &searching_key) {
+bool Graph<Key, Value, Weight>::loop(const key_type &searching_key)
+{
     if (m_nodes.count(searching_key) == 0) {
-        throw std::runtime_error("\nNo key named: " + std::string(searching_key) + " in graph. While loop command.");
+        throw std::runtime_error("\nNo key named: \"" + std::string(searching_key) + "\" in graph. While loop command.");
     }
     return m_nodes[searching_key].is_connected(searching_key);
 }
@@ -66,7 +67,7 @@ bool Graph<Key, Value, Weight>::loop(const key_type &searching_key) {
 template<typename Key, typename Value, typename Weight>
 Node<Key, Value, Weight> &Graph<Key, Value, Weight>::at(const key_type &searching_key) {
     if (m_nodes.count(searching_key) == 0) {
-        throw std::runtime_error("\nNo key named: " + std::string(searching_key) + " in graph. While at command.");
+        throw std::runtime_error("\nNo key named: \"" + std::string(searching_key) + "\" in graph. While at command.");
     }
     return m_nodes.at(searching_key);
 }
