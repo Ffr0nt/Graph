@@ -20,14 +20,14 @@ public:
     using iterator = typename  std::map< key_type, Node<key_type,value_type,weight_type> >::iterator;
     using const_iterator = typename std::map< key_type, Node<key_type,value_type,weight_type>>::const_iterator;
     using node_it =  typename Node<Key, Value, Weight>::iterator ;
-//    -----------------------|constructors|--------------------------------------
+////    -----------------------|constructors|--------------------------------------
     Graph() = default;
     Graph(const Graph& obj): m_nodes(obj.m_nodes){};
     Graph (Graph&& obj)noexcept : m_nodes(std::move(obj.m_nodes)){};
     Graph(const std::initializer_list<std::pair<key_type,value_type>> & init_list):
     m_nodes(init_list.begin(), init_list.end()){};
 
-//    ---------------------------| = |--------------------------------------
+////    ---------------------------| = |--------------------------------------
     Graph& operator = (const Graph& gr) {
         m_nodes = gr.m_nodes;
         return *this;
@@ -37,7 +37,7 @@ public:
         return *this;
     }
 
-//    ------------------------|iterators|--------------------------------------
+////    ------------------------|iterators|--------------------------------------
 
     iterator begin() noexcept;
     const_iterator begin() const noexcept;

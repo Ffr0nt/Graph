@@ -17,7 +17,7 @@ public:
     using weight_type = Weight;
     using iterator = typename std::map<key_type, weight_type> ::iterator;
     using const_iterator = typename std::map<key_type,weight_type>::const_iterator;
-//    -----------------------|constructors|--------------------------------------
+////    -----------------------|constructors|--------------------------------------
     Node() = default;
     Node(const Node& obj):data(obj.data),m_con_nodes(obj.m_con_nodes) {};
     Node (Node&& obj) noexcept : m_con_nodes(std::move(obj.m_con_nodes)), data(std::move(obj.data)){};
@@ -25,7 +25,7 @@ public:
     Node(const std::initializer_list<std::pair<key_type, weight_type>> & init_list):
             m_con_nodes(init_list.begin(), init_list.end()){};
 
-//    ------------------------------| = |--------------------------------------
+////    ------------------------------| = |--------------------------------------
     Node& operator = (const Node& obj) {
         m_con_nodes = obj.m_con_nodes;
         data = obj.data;
@@ -38,7 +38,7 @@ public:
         return *this;
     }
 
-//    ------------------------|iterators|--------------------------------------
+////    ------------------------|iterators|--------------------------------------
 
     iterator begin();
     const_iterator begin() const;
