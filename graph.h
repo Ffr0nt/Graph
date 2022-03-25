@@ -39,20 +39,20 @@ public:
 
 //    ------------------------|iterators|--------------------------------------
 
-    iterator begin();
-    const_iterator begin() const;
-    iterator end();
-    const_iterator end() const;
+    iterator begin() noexcept;
+    const_iterator begin() const noexcept;
+    iterator end() noexcept;
+    const_iterator end() const noexcept;
 
-    const_iterator cbegin() const {return m_nodes.cbegin();}
-    const_iterator cend() const {return m_nodes.cend();}
+    const_iterator cbegin() const noexcept {return m_nodes.cbegin();}
+    const_iterator cend() const noexcept {return m_nodes.cend();}
 
-//    ------------------------|addressing|------------------------------------
+////    ------------------------|addressing|------------------------------------
     value_type & operator[] (const key_type& key);
 
     Node<key_type,value_type,weight_type>& at(const key_type& key);
 
-//    --------------------------|insert|--------------------------------------
+////    --------------------------|insert|--------------------------------------
     std::pair<iterator, bool> insert_node(const key_type& input_key,const value_type& val);
 
     std::pair<iterator, bool> insert_or_assign_node(const key_type& input_key,const value_type& val);
@@ -61,8 +61,8 @@ public:
 
     std::pair<node_it, bool> insert_or_assign_edge(std::pair<key_type,key_type> key_pair, weight_type weight);
 
-//    ---------------------------|erase|--------------------------------------
-    void clear_edges() noexcept;
+////    ---------------------------|erase|--------------------------------------
+    void clear_edges();
 
     bool erase_edges_go_from(const key_type& search_key);
 
@@ -70,17 +70,17 @@ public:
 
     bool erase_node(const key_type& search_key);
 
-//    ------------------------|methods|--------------------------------------
+////    ------------------------|methods|--------------------------------------
 
-    size_t size() const{return m_nodes.size();}
+    size_t size() const noexcept {return m_nodes.size();}
 
-    bool empty() const {return size() == 0;}
+    bool empty() const noexcept {return size() == 0;}
 
-    void clear() {m_nodes.clear();}
+    void clear() noexcept {m_nodes.clear();}
 
     void swap(Graph& obj){m_nodes.swap(obj.m_nodes);};
 
-    size_t degree_in(const key_type & key);
+    size_t degree_in (const key_type & key);
 
     size_t degree_out (const key_type & key);
 

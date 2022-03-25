@@ -193,6 +193,7 @@ void test_6(){
     }
     catch( std::runtime_error er ){std::cout<<er.what()<<std::endl;}
 } // degree_in degree_out loop at special errors
+
 void test_0(){
     Graph<std::string, Point, double> gr;
     print(gr);
@@ -206,16 +207,16 @@ void test_0(){
 
 
     Graph<std::string, Point, double> graph;
-    graph["zero"]; // Заполнится точкой, которая заполнится нулями
+    graph["zero"];
     auto [it1, flag1] = graph.insert_node("first", {1, 1, 1});
     std::cout << std::boolalpha << flag1 << std::endl; // => true
-    graph["second"]; // Заполнится точкой, которая заполнится нулями
-    auto [it2, flag2] = graph.insert_or_assign_node("second", {2, 2, 2}); // перезаполнит
+    graph["second"];
+    auto [it2, flag2] = graph.insert_or_assign_node("second", {2, 2, 2});
     std::cout << std::boolalpha << flag2 << " flag2 " << std::endl; // => false
     graph["third"] = Point{ 3, 3, 3 };
-    auto [it3, flag3] = graph.insert_node("third", {1, 1, 1}); // бездействует
+    auto [it3, flag3] = graph.insert_node("third", {1, 1, 1});
     std::cout << std::boolalpha << flag3 << std::endl; // => false
-    graph["fourth"]; // Заполнится точкой, которая заполнится нулями
+    graph["fourth"];
     graph.at("fourth") = Point{ 4, 4, 4 };
     try { graph.at("fifth"); }
     catch (std::exception& ex) { std::cout << ex.what() << std::endl; }
@@ -228,23 +229,23 @@ void test_0(){
     auto [it7, flag7] = graph.insert_or_assign_edge({ "second", "first" }, 77.77);
     std::cout << std::boolalpha << flag7 << std::endl; // => true
     print(graph);
-    auto graph_other = graph; // Конструктор копирования
-    auto graph_new = std::move(graph); // Конструктор перемещения
-    graph = std::move(graph_new); // Перемещающее присваивание
-    graph_new = graph; // Копирующее присваивание
-    graph.swap(graph_new); // Поменять местами содержимое графов
-    swap(graph, graph_new); // Поменять местами содержимое графов
+    auto graph_other = graph;
+    auto graph_new = std::move(graph);
+    graph = std::move(graph_new);
+    graph_new = graph;
+    graph.swap(graph_new);
+    swap(graph, graph_new);
     print(graph);
     for (auto& [key, node] : graph) {
         std::cout << "Is here no edges?" << std::boolalpha << node.empty() << std::endl;
         std::cout << "How many edges are going from here?" << node.size() << std::endl;
-        node.value() = Point{ 1,2,3 }; // могу поменять вес
+        node.value() = Point{ 1,2,3 };
         for (auto& [key, weight] : node) {
-//             key = "new key"; // ОШИБКА: нельзя менять ключ
-            weight = 11.11; // могу задать новый вес у этого ребра
+
+            weight = 11.11;
         }
-        bool flag = node.erase_edge("first"); // => true, если удалил
-// => false, если такого ребра нет
+        bool flag = node.erase_edge("first");
+
     }
     print(graph);
     bool flag8 = graph.erase_node("new name");
@@ -278,16 +279,16 @@ void test_0(){
     bool flag13 = graph.erase_node("second");
     std::cout << std::boolalpha << flag13 << std::endl;
     print(graph);
-    graph.clear_edges(); // Очистить все рёбра
+    graph.clear_edges();
     print(graph);
-    graph.clear(); // Очистить все вершины (очевидно, вместе с рёбрами)
+    graph.clear();
     print(graph);
 
 
 } // baseline test
 
 int main() {
-    int NUM = 6;
+    int NUM = 0; //enter number of test you want to have
 
     switch (NUM) {
         case 1:

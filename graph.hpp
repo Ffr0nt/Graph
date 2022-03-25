@@ -8,25 +8,26 @@
 #include "graph.h"
 
 template<typename Key, typename Value, typename Weight>
-typename Graph<Key, Value, Weight>::iterator Graph<Key, Value, Weight>::begin() {
+typename Graph<Key, Value, Weight>::iterator Graph<Key, Value, Weight>::begin() noexcept{
     return m_nodes.begin();
 }
 
 template<typename Key, typename Value, typename Weight>
-typename Graph<Key, Value, Weight>::const_iterator Graph<Key, Value, Weight>::begin() const {
+typename Graph<Key, Value, Weight>::const_iterator Graph<Key, Value, Weight>::begin() const noexcept{
     return m_nodes.cbegin();
 }
 
 template<typename Key, typename Value, typename Weight>
-typename Graph<Key, Value, Weight>::iterator Graph<Key, Value, Weight>::end() {
+typename Graph<Key, Value, Weight>::iterator Graph<Key, Value, Weight>::end() noexcept{
     return m_nodes.end();
 }
 
 template<typename Key, typename Value, typename Weight>
-typename Graph<Key, Value, Weight>::const_iterator Graph<Key, Value, Weight>::end() const {
+typename Graph<Key, Value, Weight>::const_iterator Graph<Key, Value, Weight>::end() const noexcept{
     return m_nodes.cend();
 }
 
+//return amount of edges go in searching_key node
 template<typename Key, typename Value, typename Weight>
 size_t Graph<Key, Value, Weight>::degree_in(const key_type &searching_key) {
 
@@ -45,6 +46,7 @@ size_t Graph<Key, Value, Weight>::degree_in(const key_type &searching_key) {
 
 }
 
+//return amount of edges go in searching_key node
 template<typename Key, typename Value, typename Weight>
 size_t Graph<Key, Value, Weight>::degree_out(const key_type &searching_key) {
     if (m_nodes.count(searching_key) == 0) {
@@ -55,6 +57,7 @@ size_t Graph<Key, Value, Weight>::degree_out(const key_type &searching_key) {
 
 }
 
+//return amount of loops in searching_key node
 template<typename Key, typename Value, typename Weight>
 bool Graph<Key, Value, Weight>::loop(const key_type &searching_key)
 {
@@ -72,6 +75,7 @@ Node<Key, Value, Weight> &Graph<Key, Value, Weight>::at(const key_type &searchin
     return m_nodes.at(searching_key);
 }
 
+// returns value of searching_key node
 template<typename Key, typename Value, typename Weight>
 Value& Graph<Key, Value, Weight>::operator[](const key_type &searching_key) {
     return m_nodes[searching_key].value();
@@ -105,23 +109,26 @@ Graph<Key, Value, Weight>::insert_or_assign_edge(std::pair<key_type, key_type> k
     return m_nodes.at(key_pair.first).insert_or_assign_edge(key_pair.second, weight);
 }
 
+// erase all edges in Graph, keep nodes
 template<typename Key, typename Value, typename Weight>
-void Graph<Key, Value, Weight>::clear_edges() noexcept {
+void Graph<Key, Value, Weight>::clear_edges() {
     for (auto&[key, node]: *this){
-        node.clear_edges_for_node();
+        node.clear();
     }
 }
 
+// erase all edges go from searching_key node
 template<typename Key, typename Value, typename Weight>
 bool  Graph<Key, Value, Weight>::erase_edges_go_from(const key_type& search_key){
     try{ m_nodes.at(search_key);}
     catch (...){ return 0;}
 
-    m_nodes[search_key].clear_edges_for_node();
+    m_nodes[search_key].clear();
     return 1;
 
 }
 
+// erase all edges go in searching_key node
 template<typename Key, typename Value, typename Weight>
 bool Graph<Key, Value, Weight>::erase_edges_go_to(const key_type &search_key) {
     try{ m_nodes.at(search_key);}
