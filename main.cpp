@@ -60,7 +60,11 @@ void test_1(){
     gr_2 = Graph<std::string, Point, double>();
     print(gr_2);
 
-} // constructors ; =
+    std::cout<< "std::swap(gr_1, gr_2); print(gr_2); :"<<std::endl;
+    std::swap(gr_1, gr_2);
+    print(gr_2);
+
+} // constructors ; = swap
 void test_2(){
     Graph<std::string, Point, double> gr;
     gr["one"] = Point{1.1, 1.1,1.1};
@@ -109,7 +113,7 @@ void test_3(){
 
     std::cout<< "--------------|same graph but const|--------------"<< std::endl;
     const Graph<std::string, Point, double> graph (gr);
-    for (auto& [key, node] : graph) {
+    for (const auto& [key, node] : graph) {
         std::cout << "Is here no edges? - " << std::boolalpha << node.empty() << "\t";
         std::cout << "How many edges are going from here?" << node.size();
         std::cout<< "\tweights:";
@@ -118,6 +122,8 @@ void test_3(){
         }
         std::cout << std::endl;
     }
+
+
 
 } // iterators
 void test_4(){
@@ -219,7 +225,6 @@ void test_0(){
     std::cout<< std::endl <<  a.value() << std::endl << std::endl ;
     print(gr);
 
-
     Graph<std::string, Point, double> graph;
     graph["zero"];
     auto [it1, flag1] = graph.insert_node("first", {1, 1, 1});
@@ -302,7 +307,7 @@ void test_0(){
 } // baseline test
 
 int main() {
-    int NUM = 0; //enter number of test you want to have
+    int NUM = 6; //enter number of test you want to have
 
     switch (NUM) {
         case 1:

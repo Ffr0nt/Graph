@@ -96,7 +96,6 @@ std::pair<typename Graph<Key, Value, Weight>::iterator, bool> \
 template<typename Key, typename Value, typename Weight>
 std::pair<typename Graph<Key, Value, Weight>::iterator, bool>
 Graph<Key, Value, Weight>::insert_or_assign_node(const key_type &input_key, const value_type &input_val) {
-
     return m_nodes.insert_or_assign(input_key, input_val);
 }
 

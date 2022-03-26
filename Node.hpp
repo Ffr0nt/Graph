@@ -50,9 +50,7 @@ std::pair<typename Node<Key, Value, Weight>::iterator, bool>Node<Key, Value, Wei
 }
 
 template<typename Key, typename Value, typename Weight>
-void Node<Key, Value, Weight>::clear_edges_to_for_node(const key_type& search_key) noexcept {
-    try{ m_con_nodes.at(search_key);}
-    catch (...){ return ;}
+void Node<Key, Value, Weight>::clear_edges_to_for_node(const key_type& search_key)  {
     m_con_nodes.erase(search_key);
 }
 

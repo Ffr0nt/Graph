@@ -42,6 +42,7 @@ public:
 
     iterator begin();
     const_iterator begin() const;
+
     iterator end();
     const_iterator end() const;
 
@@ -57,7 +58,7 @@ public:
 ////    --------------------------|methods|--------------------------------------
     size_t size() const noexcept{return m_con_nodes.size();}
 
-    bool empty()  const noexcept{return size() == 0;}
+    bool empty()  const noexcept{return m_con_nodes.empty();}
 
     void clear() noexcept {m_con_nodes.clear();}
 
@@ -77,7 +78,7 @@ public:
 
 ////    ---------------------------|erase|--------------------------------------
 
-    void clear_edges_to_for_node(const key_type& search_key) noexcept;
+    void clear_edges_to_for_node(const key_type& search_key);
 
     bool erase_edge(const key_type& search_key);
 

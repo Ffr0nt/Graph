@@ -41,6 +41,7 @@ public:
 
     iterator begin() noexcept;
     const_iterator begin() const noexcept;
+
     iterator end() noexcept;
     const_iterator end() const noexcept;
 
@@ -96,6 +97,6 @@ private:
 #include "graph.hpp"
 
 template<typename Key, typename Value, typename Weight>
-void swap(Graph<Key, Value, Weight> & left, Graph<Key, Value, Weight> & right){left.swap(right);return;}
+void swap(Graph<Key, Value, Weight> & left, Graph<Key, Value, Weight> & right){left.swap(right);}
 
 #endif //GRAPH_GRAPH_H
