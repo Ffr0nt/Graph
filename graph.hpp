@@ -82,6 +82,11 @@ Value& Graph<Key, Value, Weight>::operator[](const key_type &searching_key) {
 }
 
 template<typename Key, typename Value, typename Weight>
+const Weight &Graph<Key, Value, Weight>::operator[](const key_type &searching_key) const {
+    return m_nodes[searching_key].value();
+}
+
+template<typename Key, typename Value, typename Weight>
 std::pair<typename Graph<Key, Value, Weight>::iterator, bool> \
  Graph<Key, Value, Weight>::insert_node(const key_type &input_key, const value_type &input_val) {
 
@@ -152,5 +157,6 @@ bool Graph<Key, Value, Weight>::erase_node(const key_type &search_key) {
     }
     return 1;
 }
+
 
 

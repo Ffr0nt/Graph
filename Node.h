@@ -51,8 +51,8 @@ public:
 ////    ------------------------|addressing|------------------------------------
 
     weight_type& operator[] (const key_type& key);
-    const weight_type& operator[] (const key_type& key) const;
 
+    const weight_type& operator[] (const key_type& key) const;
 
 ////    --------------------------|methods|--------------------------------------
     size_t size() const noexcept{return m_con_nodes.size();}

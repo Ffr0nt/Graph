@@ -48,7 +48,10 @@ public:
     const_iterator cend() const noexcept {return m_nodes.cend();}
 
 ////    ------------------------|addressing|------------------------------------
+
     value_type & operator[] (const key_type& key);
+
+    const weight_type& operator[] (const key_type& key) const;
 
     Node<key_type,value_type,weight_type>& at(const key_type& key);
 
