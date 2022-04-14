@@ -8,6 +8,7 @@
 #include "map"
 #include "Node.h"
 #include <iostream>
+#include <Matrix.h>
 template<typename Key,
     typename Value,
     typename Weight
@@ -20,12 +21,14 @@ public:
     using iterator = typename  std::map< key_type, Node<key_type,value_type,weight_type> >::iterator;
     using const_iterator = typename std::map< key_type, Node<key_type,value_type,weight_type>>::const_iterator;
     using node_it =  typename Node<Key, Value, Weight>::iterator ;
+
 ////    -----------------------|constructors|--------------------------------------
     Graph() = default;
     Graph(const Graph& obj): m_nodes(obj.m_nodes){};
     Graph (Graph&& obj)noexcept : m_nodes(std::move(obj.m_nodes)){};
     Graph(const std::initializer_list<std::pair<key_type,value_type>> & init_list):
     m_nodes(init_list.begin(), init_list.end()){};
+    Graph(const Matrix<weight_type> mat);
 
 ////    ---------------------------| = |--------------------------------------
     Graph& operator = (const Graph& gr) {
@@ -78,7 +81,7 @@ public:
 
     size_t size() const noexcept {return m_nodes.size();}
 
-    bool empty() const noexcept {return size() == 0;}
+    bool empty() const noexcept {return m_nodes.empty();}
 
     void clear() noexcept {m_nodes.clear();}
 

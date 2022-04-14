@@ -14,6 +14,8 @@ However, there is functional that realize graph unique features (degree in/out, 
 
 #include <iostream>
 #include "graph.h"
+#include <Matrix.h>
+#include "Fileswork.cpp"
 
 struct Point { double x, y, z; };
 std::ostream& operator << (std::ostream& out, Point p) {
@@ -213,6 +215,14 @@ void test_6(){
     }
     catch( std::runtime_error er ){std::cout<<er.what()<<std::endl;}
 } // degree_in degree_out loop at special errors
+void test_7(){
+    BinaryMode<double> BM;
+    auto new_mat = BM.read("/Users/fedor/CLionProjects/Graph_algorithm/matrix_for_input_1");
+    std::cout << new_mat;
+    Graph<int,int,double> gr = new_mat;
+    gr.empty();
+    print(gr);
+}
 
 void test_0(){
     Graph<std::string, Point, double> gr;
@@ -307,7 +317,7 @@ void test_0(){
 } // baseline test
 
 int main() {
-    int NUM = 6; //enter number of test you want to have
+    int NUM = 7; //enter number of test you want to have
 
     switch (NUM) {
         case 1:
@@ -327,6 +337,9 @@ int main() {
             break;
         case 6:
             test_6();
+            break;
+        case 7:
+            test_7();
             break;
         default:
             std::cout<<"Original tests"<< std::endl << std::endl;

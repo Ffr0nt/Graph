@@ -157,5 +157,20 @@ bool Graph<Key, Value, Weight>::erase_node(const key_type &search_key) {
     return 1;
 }
 
+template<typename Key, typename Value, typename Weight>
+Graph<Key, Value, Weight>::Graph(const Matrix<weight_type> mat) {
+
+    for(size_t i =0; i < mat.get_columns(); ++i)
+        (*this).insert_node(i, -1);
+
+    for(size_t i =0; i < mat.get_columns(); ++i){
+        for(size_t k =0; k < mat.get_rows(); ++k){
+            if (mat(i,k) == 0){continue;}
+            (*this).insert_edge({i,k}, mat(i,k));
+        }
+    }
+
+}
+
 
 
