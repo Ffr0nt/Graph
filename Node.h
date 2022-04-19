@@ -1,10 +1,10 @@
 //
 // Created by Фёдор Захаров on 13.03.2022.
 //
-
+#include "map"
 #ifndef GRAPH_NODE_H
 #define GRAPH_NODE_H
-#include "map"
+
 
 template<typename Key,
         typename Value,
@@ -17,7 +17,10 @@ public:
     using weight_type = Weight;
     using iterator = typename std::map<key_type, weight_type> ::iterator;
     using const_iterator = typename std::map<key_type,weight_type>::const_iterator;
-////    -----------------------|constructors|--------------------------------------
+
+    friend std::map<key_type, weight_type> get_con_nodes(key_type key);
+
+    ////    -----------------------|constructors|--------------------------------------
     Node() = default;
     Node(const Node& obj):data(obj.data),m_con_nodes(obj.m_con_nodes) {};
     Node (Node&& obj) noexcept : m_con_nodes(std::move(obj.m_con_nodes)), data(std::move(obj.data)){};
@@ -82,6 +85,8 @@ public:
 
     bool erase_edge(const key_type& search_key);
 
+    std::map<key_type, weight_type> get_m_con_nodes(){return m_con_nodes;}
+
 private:
     ////     --------------------------|data|--------------------------------------
     value_type data;
@@ -89,6 +94,6 @@ private:
 
 };
 
-#include"Node.hpp"
-
 #endif //GRAPH_NODE_H
+
+#include"Node.hpp"

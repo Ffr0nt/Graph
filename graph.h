@@ -1,14 +1,14 @@
 //
 // Created by Фёдор Захаров on 12.03.2022.
 //
-
-#ifndef GRAPH_GRAPH_H
-#define GRAPH_GRAPH_H
-
 #include "map"
 #include "Node.h"
 #include <iostream>
 #include <Matrix.h>
+
+#ifndef GRAPH_GRAPH_H
+#define GRAPH_GRAPH_H
+
 template<typename Key,
     typename Value,
     typename Weight
@@ -21,6 +21,10 @@ public:
     using iterator = typename  std::map< key_type, Node<key_type,value_type,weight_type> >::iterator;
     using const_iterator = typename std::map< key_type, Node<key_type,value_type,weight_type>>::const_iterator;
     using node_it =  typename Node<Key, Value, Weight>::iterator ;
+
+    using node_name_t = int;
+    using route_t = std::vector<node_name_t>;
+    using graph_t = Graph<node_name_t,Weight,Weight>;
 
 ////    -----------------------|constructors|--------------------------------------
     Graph() = default;
@@ -59,6 +63,10 @@ public:
 
     Node<key_type,value_type,weight_type>& at(const key_type& key);
 
+    iterator find(const key_type& key){return m_nodes.find(key);}
+
+    const_iterator find(const key_type& key) const {return m_nodes.find(key);}
+
 ////    --------------------------|insert|--------------------------------------
     std::pair<iterator, bool> insert_node(const key_type& input_key,const value_type& val);
 
@@ -93,13 +101,18 @@ public:
 
     bool loop(const key_type & key);
 
+    std::map<key_type, weight_type> get_con_nodes(key_type key)
+    {return m_nodes[key].get_m_con_nodes();}
+
 private:
     std::map< key_type, Node<key_type,value_type,weight_type> > m_nodes;
 
+
 };
-#include "graph.hpp"
+
 
 template<typename Key, typename Value, typename Weight>
 void swap(Graph<Key, Value, Weight> & left, Graph<Key, Value, Weight> & right){left.swap(right);}
 
 #endif //GRAPH_GRAPH_H
+#include "graph.hpp"

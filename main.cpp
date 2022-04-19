@@ -218,10 +218,13 @@ void test_6(){
 void test_7(){
     BinaryMode<double> BM;
     auto new_mat = BM.read("/Users/fedor/CLionProjects/Graph_algorithm/matrix_for_input_1");
-    std::cout << new_mat;
+//    std::cout << new_mat;
     Graph<int,int,double> gr = new_mat;
-    gr.empty();
-    print(gr);
+//    gr.empty();
+//    print(gr);
+    std::cout<< gr.get_con_nodes(1)[2];
+
+
 }
 
 void test_0(){
